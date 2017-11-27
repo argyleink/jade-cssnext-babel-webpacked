@@ -2,7 +2,6 @@ const path                = require('path')
 const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
-const Dashboard           = require('webpack-dashboard/plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
@@ -19,10 +18,6 @@ module.exports = {
     entries[entry] = path.resolve(__dirname, `app/js/${entry}.js`)
     return entries
   }, {}),
-  // entry: {
-  //   index: path.resolve(__dirname, ('app/js/index.js')),
-  //   // about: path.resolve(__dirname, (PATHS.entries + 'about.js'))
-  // },
   output: {
     path:     PATHS.output,
     filename: 'js/[name].js',
@@ -30,6 +25,20 @@ module.exports = {
   },
   cache: true,
   module: { rules: [
+    {
+      test:     /\.js$/,
+      exclude:  /node_modules/,
+      use:   [{
+        loader: 'babel-loader',
+        options: {presets: [
+          ["babel-preset-env", {
+            "targets": {
+              "browsers": ["last 2 versions"]
+            }
+          }]
+        ]}
+      }],
+    },
     {
       test: /\.css$/,
       use: [
@@ -54,8 +63,7 @@ module.exports = {
     ),
     new CopyWebpackPlugin([
       { from: 'app/images', to: 'images' }
-    ]),
-    new Dashboard()
+    ])
   ],
   devtool: '#eval-cheap-module-source-map', //inline-source-map
   devServer: { 

@@ -11,6 +11,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.3",
     "css-loader": "^0.28.7",
@@ -25,7 +28,6 @@
     "ragrid": "^1.0.5",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.4"
   }
 }
