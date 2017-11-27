@@ -1,5 +1,4 @@
 const path                = require('path')
-// const ExtractTextPlugin   = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
@@ -10,19 +9,20 @@ const PATHS = {
   jade:   `${__dirname}/app/jade/`
 }
 
-let jadePage = name => {
-  return new HtmlWebpackPlugin({
-    filename: `${name}.html`,
-    template: `${PATHS.jade}${name}.jade`,
-    inject:   false
-  })
-}
+const PAGES = [
+  'index',
+  'about',
+]
 
 module.exports = {
-  entry: {
-    index: path.resolve(__dirname, ('app/js/index.js')),
-    // about: path.resolve(__dirname, (PATHS.entries + 'about.js'))
-  },
+  entry: PAGES.reduce((entries, entry) => {
+    entries[entry] = path.resolve(__dirname, `app/js/${entry}.js`)
+    return entries
+  }, {}),
+  // entry: {
+  //   index: path.resolve(__dirname, ('app/js/index.js')),
+  //   // about: path.resolve(__dirname, (PATHS.entries + 'about.js'))
+  // },
   output: {
     path:     PATHS.output,
     filename: 'js/[name].js',
@@ -31,7 +31,7 @@ module.exports = {
   cache: true,
   module: { rules: [
     {
-      test:     /\.css$/,
+      test: /\.css$/,
       use: [
         'style-loader',
         { loader: 'css-loader', options: { importLoaders: 1 } },
@@ -39,22 +39,19 @@ module.exports = {
       ]
     },
     { 
-      test:     /\.jade$/,
-      use:      [{
-        loader: 'jade-loader',
-        options: {
-          locals: {
-            project: 'Bolt'
-          }
-        }
-      }]
+      test: /\.jade$/,
+      loader: 'jade-loader'
     }
   ]},
   plugins: [
     new CleanWebpackPlugin([PATHS.output]),
-    jadePage('index'),
-    // jadePage('about'),
-    // new ExtractTextPlugin('css/[name].css'),
+    ...PAGES.map(name =>
+      new HtmlWebpackPlugin({
+        filename: `${name}.html`,
+        template: `${PATHS.jade}${name}.jade`,
+        inject:   false
+      })
+    ),
     new CopyWebpackPlugin([
       { from: 'app/images', to: 'images' }
     ]),
