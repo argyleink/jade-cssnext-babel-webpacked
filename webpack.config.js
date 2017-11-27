@@ -3,17 +3,17 @@ const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
 const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
+const fs                  = require('fs')
 
 const PATHS = {
   output: `${__dirname}/public/`,
   jade:   `${__dirname}/app/jade/`
 }
 
-// todo: fetch this from the dir
-const PAGES = [
-  'index',
-  'about',
-]
+const PAGES = fs
+  .readdirSync('./app/js/')
+  .filter(item => item.search('.js') > 0)
+  .map(item => item.slice(0, item.length - 3))
 
 module.exports = {
   entry: PAGES.reduce((entries, entry) => {
@@ -35,7 +35,7 @@ module.exports = {
         options: { presets: [
           ['babel-preset-env', {
             targets: {
-              browsers: ['last 2 versions']
+              browsers: ['chrome > 55']
             }
           }]
         ]}
