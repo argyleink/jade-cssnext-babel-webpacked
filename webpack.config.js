@@ -51,7 +51,7 @@ module.exports = {
     },
     { 
       test: /\.jade$/,
-      loader: 'jade-loader' // todo: get locals working
+      loader: 'jade-loader'
     }
   ]},
   plugins: [
@@ -60,7 +60,10 @@ module.exports = {
       new HtmlWebpackPlugin({
         filename: `${name}.html`,
         template: `${PATHS.jade}${name}.jade`,
-        inject:   false
+        inject:   false,
+        meta: {
+          theme: '#000000'
+        }
       })
     ),
     new CopyWebpackPlugin([
