@@ -1,0 +1,13 @@
+@import './vars.css';
+
+body, html {
+  font-family: system-ui;
+  margin: 0;
+  background: hsl(0,0%,3%);
+  min-height: 100vh;
+}
+
+header {
+  min-height: 100vh;
+  color: hsl(0,0%,15%);
+}

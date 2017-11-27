@@ -1,0 +1,13 @@
+extends layouts/page
+
+append config
+  - var current = 'index'
+
+block content
+  header(grid vertically-aligned='center' horizontally-aligned='center'): section.text-center
+    h2 Jade, CSSNext (autoprefixer), ES6 (Babel)
+    +link({
+      text: 'Bolt'
+    , url:  'https://github.com/argyleink/Bolt'
+    , blank: true
+    })
