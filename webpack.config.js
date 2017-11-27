@@ -8,6 +8,7 @@ const PATHS = {
   jade:   `${__dirname}/app/jade/`
 }
 
+// todo: fetch this from the dir
 const PAGES = [
   'index',
   'about',
@@ -49,7 +50,7 @@ module.exports = {
     },
     { 
       test: /\.jade$/,
-      loader: 'jade-loader'
+      loader: 'jade-loader' // todo: get locals working
     }
   ]},
   plugins: [

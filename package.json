@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open",
-    "watch": "webpack-dashboard -- webpack-dev-server --open"
+    "start": "webpack-dev-server --open"
   },
   "author": "",
   "license": "MIT",
