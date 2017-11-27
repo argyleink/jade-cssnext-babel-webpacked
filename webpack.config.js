@@ -2,6 +2,7 @@ const path                = require('path')
 const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
+const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
@@ -29,12 +30,12 @@ module.exports = {
     {
       test:     /\.js$/,
       exclude:  /node_modules/,
-      use:   [{
+      use:      [{
         loader: 'babel-loader',
-        options: {presets: [
-          ["babel-preset-env", {
-            "targets": {
-              "browsers": ["last 2 versions"]
+        options: { presets: [
+          ['babel-preset-env', {
+            targets: {
+              browsers: ['last 2 versions']
             }
           }]
         ]}
@@ -64,11 +65,17 @@ module.exports = {
     ),
     new CopyWebpackPlugin([
       { from: 'app/images', to: 'images' }
-    ])
+    ]),
+    new BrowserSyncPlugin({
+      host:   'localhost',
+      port:   3030,
+      proxy: 'http://localhost:8080/'
+    }, {
+      reload: false
+    })
   ],
-  devtool: '#eval-cheap-module-source-map', //inline-source-map
+  devtool: '#eval-cheap-module-source-map',
   devServer: { 
-    contentBase:  PATHS.output,
-    port:         3030
+    contentBase: PATHS.output
   },
 }

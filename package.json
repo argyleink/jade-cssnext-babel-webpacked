@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --progress --colors",
+    "start": "npm run build && npm run dev"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +14,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.3",
     "css-loader": "^0.28.7",
