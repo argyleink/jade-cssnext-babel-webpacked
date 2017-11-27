@@ -10,4 +10,19 @@ body, html {
 header {
   min-height: 100vh;
   color: hsl(0,0%,15%);
+
+  & .title {
+    width: 66vw;
+    font-weight: lighter;
+    font-size: 7vh;
+
+    & span.spacer {
+      color: hsl(0,0%,5%);
+      font-size: 2em;
+    }
+  }
+
+  & nav {
+    width: 200px;
+  }
 }
