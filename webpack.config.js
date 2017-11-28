@@ -3,14 +3,13 @@ const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
 const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
-const fs                  = require('fs')
 
 const PATHS = {
   output: `${__dirname}/public/`,
   jade:   `${__dirname}/app/jade/`
 }
 
-const PAGES = fs
+const PAGES = require('fs')
   .readdirSync('./app/js/')
   .filter(item => item.search('.js') > 0)
   .map(item => item.slice(0, item.length - 3))
@@ -77,7 +76,7 @@ module.exports = {
       reload: false
     })
   ],
-  devtool: '#eval-cheap-module-source-map',
+  devtool: '#eval-source-map',
   devServer: { 
     contentBase: PATHS.output
   },

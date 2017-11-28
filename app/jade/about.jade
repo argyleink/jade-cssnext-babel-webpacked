@@ -4,5 +4,12 @@ append config
   - var current = 'about'
 
 block content
-  header(grid vertically-aligned='center' horizontally-aligned='center'): section.text-center
-    h2 About
+  nav(grid vertically-aligned='center' horizontally-distributed='around')
+    +link({
+      text: 'Home'
+    , url:  '/home.html'
+    })
+    +link({
+      text: 'About'
+    , url:  '/about.html'
+    })

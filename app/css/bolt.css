@@ -1,0 +1,7 @@
+.bolt-logo {
+  max-width: 300px;
+
+  & path {
+    fill: hsl(0,0%,10%);
+  }
+}
