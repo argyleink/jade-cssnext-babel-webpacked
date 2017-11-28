@@ -3,7 +3,7 @@ header {
   color: hsl(0,0%,20%);
 
   & .title {
-    width: 66vw;
+    width: 80vw;
     font-weight: lighter;
     font-size: 7vh;
     text-transform: uppercase;
