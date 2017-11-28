@@ -6,6 +6,4 @@ import '../css/bolt.css'
 
 import { $ } from './utilities/shorthands'
 
-(async () => {
-  console.log($('header'))
-})()
+console.log($('header'))
