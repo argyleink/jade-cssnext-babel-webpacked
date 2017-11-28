@@ -27,19 +27,19 @@ module.exports = {
     pathinfo: true
   },
   module: { rules: [
-    // {
-    //   test:     /\.js$/,
-    //   use:      [{
-    //     loader: 'babel-loader',
-    //     options: { presets: [
-    //       ['babel-preset-env', {
-    //         targets: {
-    //           browsers: ['chrome > 55']
-    //         }
-    //       }]
-    //     ]}
-    //   }],
-    // },
+    {
+      test:     /\.js$/,
+      use:      [{
+        loader: 'babel-loader',
+        options: { presets: [
+          ['babel-preset-env', {
+            targets: {
+              browsers: ['chrome > 55']
+            }
+          }]
+        ]}
+      }],
+    },
     {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
