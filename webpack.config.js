@@ -58,11 +58,12 @@ module.exports = {
   ]},
   plugins: [
     new CleanWebpackPlugin([PATHS.output]),
-    ...PAGES.map(name =>
+    ...PAGES.map(page =>
       new HtmlWebpackPlugin({
-        filename: `${name}.html`,
-        template: `${PATHS.src}/${name}.jade`,
+        filename: `${page}.html`,
+        template: `${PATHS.src}/${page}.jade`,
         inject:   false,
+        page:     page,
         meta: {
           theme: '#000000'
         }

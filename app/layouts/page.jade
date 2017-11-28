@@ -3,7 +3,6 @@ include ../mixins/og-meta
 include ../mixins/twitter-meta
 
 block config
-  - var current = 'main'
   - var pageTitle = 'Jade | CSSNext | Babel'
 
 doctype html
@@ -13,9 +12,9 @@ html
   block title
     title= pageTitle
 
-  link(rel='stylesheet' href='/css/#{current}.css')
+  link(rel='stylesheet' href='/css/#{htmlWebpackPlugin.options.page}.css')
 
   body
     block content
 
-    script(src='/js/#{current}.js' async)
+    script(src='/js/#{htmlWebpackPlugin.options.page}.js' async)
