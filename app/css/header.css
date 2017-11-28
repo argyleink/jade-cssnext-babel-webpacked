@@ -6,6 +6,7 @@ header {
     width: 66vw;
     font-weight: lighter;
     font-size: 7vh;
+    text-transform: uppercase;
 
     & span.spacer {
       color: hsl(0,0%,5%);

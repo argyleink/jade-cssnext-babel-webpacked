@@ -16,10 +16,7 @@ html
   block title
     title= pageTitle
 
-  //- block css
-    //- link(rel="stylesheet", href="./css/#{current}.css")
-
   body
     block content
 
-    script(src='./js/#{current}.js')
+    script(src='./js/#{current}.js' defer)

@@ -6,7 +6,8 @@ const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
-  jade:   `${__dirname}/app/jade/`
+  jade:   `${__dirname}/app/jade/`,
+  port:   3030
 }
 
 const PAGES = require('fs')
@@ -24,7 +25,6 @@ module.exports = {
     filename: 'js/[name].js',
     pathinfo: true
   },
-  cache: true,
   module: { rules: [
     {
       test:     /\.js$/,
@@ -50,6 +50,7 @@ module.exports = {
     },
     { 
       test: /\.jade$/,
+      exclude:  /node_modules/,
       loader: 'jade-loader'
     }
   ]},
@@ -70,7 +71,7 @@ module.exports = {
     ]),
     new BrowserSyncPlugin({
       host:   'localhost',
-      port:   3030,
+      port:   PATHS.port,
       proxy: 'http://localhost:8080/'
     }, {
       reload: false
