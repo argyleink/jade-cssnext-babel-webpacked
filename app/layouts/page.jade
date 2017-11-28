@@ -10,13 +10,12 @@ doctype html
 html
   include ../partials/head
 
-  //- block description
-  //-   meta(name='description' content=data.meta.description)
-
   block title
     title= pageTitle
+
+  link(rel='stylesheet' href='/css/#{current}.css')
 
   body
     block content
 
-    script(src='./js/#{current}.js' defer)
+    script(src='/js/#{current}.js' async)

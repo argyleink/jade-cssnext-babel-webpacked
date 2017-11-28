@@ -3,6 +3,7 @@ const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
 const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
+const ExtractTextPlugin   = require('extract-text-webpack-plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
@@ -42,11 +43,13 @@ module.exports = {
     // },
     {
       test: /\.css$/,
-      use: [
-        'style-loader',
-        { loader: 'css-loader', options: { importLoaders: 1 } },
-        'postcss-loader'
-      ]
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader'
+        ]
+      })
     },
     { 
       test: /\.jade$/,
@@ -66,6 +69,7 @@ module.exports = {
         }
       })
     ),
+    new ExtractTextPlugin('css/[name].css'),
     new CopyWebpackPlugin([
       { from: `${PATHS.src}/images`, to: 'images' }
     ]),
@@ -79,6 +83,12 @@ module.exports = {
   ],
   devtool: '#eval-source-map',
   devServer: { 
-    contentBase: PATHS.output
+    contentBase: PATHS.output,
+    stats: {
+      modules:  false,
+      cached:   false,
+      colors:   true,
+      chunk:    false
+    }
   },
 }
