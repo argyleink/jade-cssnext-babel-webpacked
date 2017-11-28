@@ -1,4 +1,3 @@
 import 'ragrid'
 import '../css/body.css'
-
-console.info('works')
+import '../css/nav.css'
