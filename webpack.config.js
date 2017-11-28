@@ -6,18 +6,18 @@ const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
-  jade:   `${__dirname}/app/jade/`,
+  src:    `./app`,
   port:   3030
 }
 
 const PAGES = require('fs')
-  .readdirSync('./app/js/')
+  .readdirSync(`${PATHS.src}/js/`)
   .filter(item => item.search('.js') > 0)
   .map(item => item.slice(0, item.length - 3))
 
 module.exports = {
   entry: PAGES.reduce((entries, entry) => {
-    entries[entry] = path.resolve(__dirname, `app/js/${entry}.js`)
+    entries[entry] = path.resolve(__dirname, `${PATHS.src}/js/${entry}.js`)
     return entries
   }, {}),
   output: {
@@ -26,20 +26,20 @@ module.exports = {
     pathinfo: true
   },
   module: { rules: [
-    {
-      test:     /\.js$/,
-      exclude:  /node_modules/,
-      use:      [{
-        loader: 'babel-loader',
-        options: { presets: [
-          ['babel-preset-env', {
-            targets: {
-              browsers: ['chrome > 55']
-            }
-          }]
-        ]}
-      }],
-    },
+    // {
+    //   test:     /\.js$/,
+    //   exclude:  /node_modules/,
+    //   use:      [{
+    //     loader: 'babel-loader',
+    //     options: { presets: [
+    //       ['babel-preset-env', {
+    //         targets: {
+    //           browsers: ['chrome > 55']
+    //         }
+    //       }]
+    //     ]}
+    //   }],
+    // },
     {
       test: /\.css$/,
       use: [
@@ -59,7 +59,7 @@ module.exports = {
     ...PAGES.map(name =>
       new HtmlWebpackPlugin({
         filename: `${name}.html`,
-        template: `${PATHS.jade}${name}.jade`,
+        template: `${PATHS.src}/${name}.jade`,
         inject:   false,
         meta: {
           theme: '#000000'
@@ -67,7 +67,7 @@ module.exports = {
       })
     ),
     new CopyWebpackPlugin([
-      { from: 'app/images', to: 'images' }
+      { from: `${PATHS.src}/images`, to: 'images' }
     ]),
     new BrowserSyncPlugin({
       host:   'localhost',
