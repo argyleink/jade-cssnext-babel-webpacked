@@ -51,9 +51,9 @@ module.exports = {
       })
     },
     { 
-      test: /\.jade$/,
+      test:     /\.jade$/,
       exclude:  /node_modules/,
-      loader: 'jade-loader'
+      loader:   'jade-loader'
     }
   ]},
   plugins: [
@@ -70,13 +70,14 @@ module.exports = {
       })
     ),
     new ExtractTextPlugin('css/[name].css'),
-    new CopyWebpackPlugin([
-      { from: `${PATHS.src}/images`, to: 'images' }
-    ]),
+    new CopyWebpackPlugin([{ 
+      from: `${PATHS.src}/images`,
+      to:   'images'
+    }]),
     new BrowserSyncPlugin({
       host:   'localhost',
       port:   PATHS.port,
-      proxy: 'http://localhost:8080/'
+      proxy:  'http://localhost:8080/'
     }, {
       reload: false
     })
