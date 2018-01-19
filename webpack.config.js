@@ -26,6 +26,9 @@ module.exports = {
     filename: 'js/[name].js',
     pathinfo: true
   },
+  resolve: {
+    modules: [path.resolve(__dirname, 'app/js'), 'node_modules'],
+  },
   module: { rules: [
     {
       test:     /\.js$/,
@@ -35,7 +38,8 @@ module.exports = {
           ['babel-preset-env', {
             targets: {
               browsers: ['chrome > 55']
-            }
+            },
+            modules: false
           }]
         ]}
       }],
