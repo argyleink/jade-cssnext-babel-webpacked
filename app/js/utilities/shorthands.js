@@ -1,2 +1,5 @@
-export const $    = query => document.querySelector(query)
-export const $$   = query => document.querySelectorAll(query)
+// $('h1') or $('h1:last-child', node_context)
+export const $  = (query, context = document) => context.querySelector(query)
+
+// $$('h1') or $$('h1', node_context)
+export const $$ = (query, context = document) => context.querySelectorAll(query)
