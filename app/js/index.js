@@ -4,6 +4,6 @@ import '../css/header.css'
 import '../css/nav.css'
 import '../css/bolt.css'
 
-import { $ } from 'utilities/shorthands'
+import { $ } from 'blingblingjs'
 
 console.log($('header'))
