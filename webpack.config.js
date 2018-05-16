@@ -2,8 +2,8 @@ const path                = require('path')
 const HtmlWebpackPlugin   = require('html-webpack-plugin')
 const CopyWebpackPlugin   = require('copy-webpack-plugin')
 const CleanWebpackPlugin  = require('clean-webpack-plugin')
-const BrowserSyncPlugin   = require('browser-sync-webpack-plugin')
 const ExtractTextPlugin   = require('extract-text-webpack-plugin')
+const UglifyJsPlugin      = require('uglifyjs-webpack-plugin')
 
 const PATHS = {
   output: `${__dirname}/public/`,
@@ -78,22 +78,32 @@ module.exports = {
       from: `${PATHS.src}/images`,
       to:   'images'
     }]),
-    new BrowserSyncPlugin({
-      host:   'localhost',
-      port:   PATHS.port,
-      proxy:  'http://localhost:8080/'
-    }, {
-      reload: false
-    })
   ],
-  devtool: '#eval-source-map',
   devServer: { 
     contentBase: PATHS.output,
     stats: {
       modules:  false,
       cached:   false,
       colors:   true,
-      chunk:    false
+      chunk:    false,
+      children: false,
+      builtAt:  false,
     }
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: true,
+          ecma: 7,
+          toplevel: false,
+          ie8: false,
+          safari10: false,
+          output:   { comments: false },
+          compress: { dead_code: true, drop_console: true }
+        },
+        sourceMap: false,
+      })
+    ]
   },
 }
