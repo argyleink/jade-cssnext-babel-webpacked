@@ -1,9 +1,11 @@
-const path                = require('path')
-const HtmlWebpackPlugin   = require('html-webpack-plugin')
-const CopyWebpackPlugin   = require('copy-webpack-plugin')
-const CleanWebpackPlugin  = require('clean-webpack-plugin')
-const ExtractTextPlugin   = require('extract-text-webpack-plugin')
-const UglifyJsPlugin      = require('uglifyjs-webpack-plugin')
+const path                      = require('path')
+const HtmlWebpackPlugin         = require('html-webpack-plugin')
+const CopyWebpackPlugin         = require('copy-webpack-plugin')
+const CleanWebpackPlugin        = require('clean-webpack-plugin')
+const MiniCssExtractPlugin      = require("mini-css-extract-plugin")
+
+const UglifyJsPlugin            = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin   = require("optimize-css-assets-webpack-plugin")
 
 const PATHS = {
   output: `${__dirname}/public/`,
@@ -46,19 +48,17 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader'
-        ]
-      })
+      use: [
+        process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+        'css-loader',
+        'postcss-loader',
+      ]
     },
     { 
       test:     /\.jade$/,
       exclude:  /node_modules/,
       loader:   'jade-loader'
-    }
+    },
   ]},
   plugins: [
     new CleanWebpackPlugin([PATHS.output]),
@@ -73,7 +73,10 @@ module.exports = {
         }
       })
     ),
-    new ExtractTextPlugin('css/[name].css'),
+    new MiniCssExtractPlugin({
+      filename:       'css/[name].css',
+      chunkFilename:  'css/[id].css',
+    }),
     new CopyWebpackPlugin([{ 
       from: `${PATHS.src}/images`,
       to:   'images'
@@ -95,15 +98,16 @@ module.exports = {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: true,
-          ecma: 7,
+          ecma:     7,
           toplevel: false,
-          ie8: false,
+          ie8:      false,
           safari10: false,
           output:   { comments: false },
           compress: { dead_code: true, drop_console: true }
         },
         sourceMap: false,
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
 }
