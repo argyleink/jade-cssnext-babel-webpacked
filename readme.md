@@ -7,6 +7,7 @@
 - ITCSS folder structure
 - Copies static assets
 - Turbo Crunch included
+- Pretty URLs started
 
 #### Get Started
 - `npm i`

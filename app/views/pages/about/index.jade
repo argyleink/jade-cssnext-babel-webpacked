@@ -1,15 +1,11 @@
-extends ../layouts/page
+extends ../../layouts/page
+
+append config
+  - var pageTitle = 'About Page'
 
 block content
   header(grid='rows' vertically-aligned='center' horizontally-aligned='center')
-    include ../svg/bolt
-    .title(grid vertically-aligned='center' horizontally-distributed='around')
-      span Jade
-      span.spacer |
-      span CSSNext
-      span.spacer |
-      span Babel
-
+    p Ready for hackin
     nav
       +link({
         text: 'Home',
