@@ -1,6 +1,8 @@
+@import '../settings/vars.css';
+
 header {
   min-height: 100vh;
-  color: hsl(0,0%,20%);
+  color: var(--dark-grey);
 
   & .title {
     width: 80vw;
@@ -9,7 +11,7 @@ header {
     text-transform: uppercase;
 
     & span.spacer {
-      color: hsl(0,0%,5%);
+      color: var(--darker-grey);
       font-size: 2em;
     }
   }

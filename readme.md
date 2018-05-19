@@ -1,8 +1,12 @@
 ### Features
-- All of Jade's powers
+- All of Jade's powers (!Pug)
 - Write CSS to spec with CSSNext and PostCSS
 - Write Javascript to spec with Babel
 - Bundles made per page
+- Code splitting common css/js chunks
+- ITCSS folder structure
+- Copies static assets
+- Turbo Crunch included
 
 #### Get Started
 - `npm i`

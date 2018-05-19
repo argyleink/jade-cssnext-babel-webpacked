@@ -1,8 +1,8 @@
-@import './vars.css';
+@import '../settings/vars.css';
 
 body, html {
   font-family: system-ui;
   margin: 0;
-  background: hsl(0,0%,3%);
+  background: var(--darkest-grey);
   min-height: 100vh;
 }

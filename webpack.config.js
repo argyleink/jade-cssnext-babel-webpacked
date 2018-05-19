@@ -1,4 +1,6 @@
 const path                      = require('path')
+const glob                      = require('glob')
+const webpack                   = require('webpack')
 const HtmlWebpackPlugin         = require('html-webpack-plugin')
 const CopyWebpackPlugin         = require('copy-webpack-plugin')
 const CleanWebpackPlugin        = require('clean-webpack-plugin')
@@ -10,17 +12,16 @@ const OptimizeCSSAssetsPlugin   = require("optimize-css-assets-webpack-plugin")
 const PATHS = {
   output: `${__dirname}/public/`,
   src:    `./app`,
-  port:   3030
+  views:  `./app/views/pages/`,
 }
 
-const PAGES = require('fs')
-  .readdirSync(`${PATHS.src}/js/`)
-  .filter(item => item.search('.js') > 0)
-  .map(item => item.slice(0, item.length - 3))
+const PAGES = glob
+  .sync(`${PATHS.views}**/*.jade`)
+  .map(item => item.slice(PATHS.views.length, item.length - 5))
 
 module.exports = {
   entry: PAGES.reduce((entries, entry) => {
-    entries[entry] = path.resolve(__dirname, `${PATHS.src}/js/${entry}.js`)
+    entries[entry] = path.resolve(__dirname, `${PATHS.views}${entry}.js`)
     return entries
   }, {}),
   output: {
@@ -29,7 +30,14 @@ module.exports = {
     pathinfo: true
   },
   resolve: {
-    modules: [path.resolve(__dirname, 'app/js'), 'node_modules'],
+    modules: [
+      path.resolve(__dirname, 'app/js'), 
+      'node_modules'
+    ],
+    alias: {
+      JS:  path.resolve(__dirname, 'app/js'),
+      CSS: path.resolve(__dirname, 'app/css'),
+    }
   },
   module: { rules: [
     {
@@ -49,7 +57,7 @@ module.exports = {
     {
       test: /\.css$/,
       use: [
-        process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+        MiniCssExtractPlugin.loader,
         'css-loader',
         'postcss-loader',
       ]
@@ -65,7 +73,7 @@ module.exports = {
     ...PAGES.map(page =>
       new HtmlWebpackPlugin({
         filename: `${page}.html`,
-        template: `${PATHS.src}/${page}.jade`,
+        template: `${PATHS.views}${page}.jade`,
         inject:   false,
         page:     page,
         meta: {
@@ -78,8 +86,8 @@ module.exports = {
       chunkFilename:  'css/[id].css',
     }),
     new CopyWebpackPlugin([{ 
-      from: `${PATHS.src}/images`,
-      to:   'images'
+      from: `${PATHS.src}/assets`,
+      to:   'assets'
     }]),
   ],
   devServer: { 
@@ -94,6 +102,15 @@ module.exports = {
     }
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name:       'common.bundle',
+          chunks:     'initial',
+          minChunks:  2
+        }
+      }
+    },
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
