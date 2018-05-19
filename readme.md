@@ -14,4 +14,4 @@
 - `npm start` or `npm run build:dev`
 
 <img src="https://www.dropbox.com/s/vvqb626x2luxzwm/seed-wp4.png?raw=1"/>
-<img src="https://www.dropbox.com/s/vvqb626x2luxzwm/seed-wp4-prod.png?raw=1"/>
+<img src="https://www.dropbox.com/s/wbeq5541zn1znpb/seed-wp4-prod.png?raw=1"/>
