@@ -110,14 +110,14 @@ module.exports = {
         commons: {
           name:     'common.bundle',
           chunks:   'all',
-          enforce:  true
+          enforce:  true,
         },
-        styles: {
-          name:     'common.bundle',
-          test:     /\.css$/,
-          chunks:   'all',
-          enforce:  true
-        }
+        // styles: {
+        //   name:     'styles.bundle',
+        //   test:     /\.css$/,
+        //   chunks:   'all',
+        //   enforce:  true,
+        // }
       }
     },
     minimizer: [
