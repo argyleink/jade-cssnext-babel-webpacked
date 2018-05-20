@@ -1,5 +1,4 @@
 const path                      = require('path')
-const glob                      = require('glob')
 const webpack                   = require('webpack')
 const HtmlWebpackPlugin         = require('html-webpack-plugin')
 const CopyWebpackPlugin         = require('copy-webpack-plugin')
@@ -15,9 +14,12 @@ const PATHS = {
   views:  `./app/views/pages/`,
 }
 
-const PAGES = glob
+const PAGES = require('glob')
   .sync(`${PATHS.views}**/*.jade`)
   .map(item => item.slice(PATHS.views.length, item.length - 5))
+
+const DATA = require('quaff')('./app/data/')
+console.log(DATA)
 
 module.exports = {
   entry: PAGES.reduce((entries, entry) => {
@@ -76,6 +78,7 @@ module.exports = {
         template: `${PATHS.views}${page}.jade`,
         inject:   false,
         page,
+        DATA,
         meta: {
           theme: '#000000'
         }
