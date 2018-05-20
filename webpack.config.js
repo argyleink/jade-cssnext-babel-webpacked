@@ -19,7 +19,6 @@ const PAGES = require('glob')
   .map(item => item.slice(PATHS.views.length, item.length - 5))
 
 const DATA = require('quaff')('./app/data/')
-console.log(DATA)
 
 module.exports = {
   entry: PAGES.reduce((entries, entry) => {
