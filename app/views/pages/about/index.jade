@@ -5,13 +5,5 @@ append config
 
 block content
   header(grid='rows' vertically-aligned='center' horizontally-aligned='center')
-    p Ready for hackin
-    nav
-      +link({
-        text: 'Home',
-        url:  '/'
-      })
-      +link({
-        text: 'About',
-        url:  '/about/'
-      })
+    .title(grid vertically-aligned='center' horizontally-distributed='around')
+      span Ready 4 hackin

@@ -12,14 +12,16 @@ html
   block title
     title= pageTitle
 
-  link(rel='preload' href='/css/common.bundle.css' as='style')
-  link(rel='preload' href='/js/common.bundle.js' as='script')
+  link(rel='preload' href='/common.bundle.css' as='style')
+  link(rel='preload' href='/common.bundle.js' as='script')
 
-  link(rel='stylesheet' href='/css/common.bundle.css')
-  link(rel='stylesheet' href='/css/#{htmlWebpackPlugin.options.page}.css')
+  link(rel='stylesheet' href='/common.bundle.css')
+
+  if htmlWebpackPlugin.options.page
+    link(rel='stylesheet' href='/#{htmlWebpackPlugin.options.page}.css')
 
   body
     block content
 
-    script(src='/js/common.bundle.js' defer)
-    script(src='/js/#{htmlWebpackPlugin.options.page}.js' defer)
+    script(src='/common.bundle.js' defer)
+    script(src='index.js' defer)

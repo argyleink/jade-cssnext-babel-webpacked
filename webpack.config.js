@@ -26,7 +26,7 @@ module.exports = {
   }, {}),
   output: {
     path:     PATHS.output,
-    filename: 'js/[name].js',
+    filename: '[name].js',
     pathinfo: true
   },
   resolve: {
@@ -75,15 +75,15 @@ module.exports = {
         filename: `${page}.html`,
         template: `${PATHS.views}${page}.jade`,
         inject:   false,
-        page:     page,
+        page,
         meta: {
           theme: '#000000'
         }
       })
     ),
     new MiniCssExtractPlugin({
-      filename:       'css/[name].css',
-      chunkFilename:  'css/[id].css',
+      filename:       '[name].css',
+      chunkFilename:  '[id].css',
     }),
     new CopyWebpackPlugin([{ 
       from: `${PATHS.src}/assets`,
@@ -93,9 +93,10 @@ module.exports = {
   devServer: { 
     contentBase: PATHS.output,
     stats: {
+      colors:   true,
+      progress: true,
       modules:  false,
       cached:   false,
-      colors:   true,
       chunk:    false,
       children: false,
       builtAt:  false,
@@ -105,9 +106,15 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         commons: {
-          name:       'common.bundle',
-          chunks:     'initial',
-          minChunks:  2
+          name:     'common.bundle',
+          chunks:   'all',
+          enforce:  true
+        },
+        styles: {
+          name:     'common.bundle',
+          test:     /\.css$/,
+          chunks:   'all',
+          enforce:  true
         }
       }
     },
