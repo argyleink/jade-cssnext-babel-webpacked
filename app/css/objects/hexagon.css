@@ -1,0 +1,6 @@
+.hexagon-logo {
+  max-width: 300px;
+  stroke: blue;
+  stroke-linejoin: round;
+  stroke-width: 10px;
+}
