@@ -2,7 +2,6 @@
 
 header {
   min-height: 100vh;
-  color: var(--dark-grey);
 
   & .title {
     width: 80vw;
@@ -12,6 +11,7 @@ header {
 
     & > a:not(:hover) {
       text-decoration: none;
+      color: var(--dark-grey);
     }
 
     & span.spacer {
@@ -22,5 +22,6 @@ header {
 
   & .subtitle {
     font-weight: lighter;
+    color: var(--dark-grey);
   }
 }
