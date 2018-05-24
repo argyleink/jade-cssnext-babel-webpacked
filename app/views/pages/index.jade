@@ -4,21 +4,24 @@ block content
   header(grid='rows' vertically-aligned='center' horizontally-aligned='center')
     include ../svg/hexagon
     .title(grid vertically-aligned='center' horizontally-distributed='around')
-      span Jade
+      +link({
+        text: 'Jade',
+        url:  '/views/'
+      })
+
       span.spacer |
-      span CSSNext
+
+      +link({
+        text: 'CSSNext',
+        url:  '/styles/'
+      })
+
       span.spacer |
-      span Babel
+
+      +link({
+        text: 'Babel',
+        url:  '/js/'
+      })
 
     .subtitle
-      span #{htmlWebpackPlugin.options.DATA.user.name}
-
-    nav
-      +link({
-        text: 'Home',
-        url:  '/'
-      })
-      +link({
-        text: 'About',
-        url:  '/about/'
-      })
+      | Example build time data: #{htmlWebpackPlugin.options.DATA.user.name}

@@ -10,9 +10,17 @@ header {
     font-size: 7vh;
     text-transform: uppercase;
 
+    & > a:not(:hover) {
+      text-decoration: none;
+    }
+
     & span.spacer {
       color: var(--darker-grey);
       font-size: 2em;
     }
+  }
+
+  & .subtitle {
+    font-weight: lighter;
   }
 }
