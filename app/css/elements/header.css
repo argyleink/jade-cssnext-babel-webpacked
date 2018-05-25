@@ -1,4 +1,4 @@
-@import '../settings/vars.css';
+@import '../settings/colors.css';
 
 header {
   min-height: 100vh;
@@ -12,6 +12,15 @@ header {
     & > a:not(:hover) {
       text-decoration: none;
       color: var(--dark-grey);
+      animation: glow-blue 5s ease 1s infinite;
+
+      &:nth-of-type(2) {
+        animation-delay: 1.5s;
+      }
+
+      &:nth-of-type(3) {
+        animation-delay: 2s;
+      }
     }
 
     & span.spacer {
@@ -23,5 +32,11 @@ header {
   & .subtitle {
     font-weight: lighter;
     color: var(--dark-grey);
+  }
+}
+
+@keyframes glow-blue {
+  30%, 60% {
+    color: blue;
   }
 }

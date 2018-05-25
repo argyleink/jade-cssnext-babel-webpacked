@@ -16,8 +16,7 @@ html
   link(rel='preload' href='/common.bundle.js' as='script')
 
   link(rel='stylesheet' href='/common.bundle.css')
-  if htmlWebpackPlugin.options.page
-    link(rel='stylesheet' href='/#{htmlWebpackPlugin.options.page}.css')
+  link(rel='stylesheet' href='index.css')
 
   body
     block content
