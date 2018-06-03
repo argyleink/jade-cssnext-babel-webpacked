@@ -36,19 +36,19 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      JS:  path.resolve(__dirname, 'app/js'),
-      CSS: path.resolve(__dirname, 'app/css'),
+      '~': path.resolve(__dirname, 'app'),
     }
   },
   module: { rules: [
     {
       test:     /\.js$/,
+      exclude: /node_modules/,
       use:      [{
         loader: 'babel-loader',
         options: { presets: [
           ['babel-preset-env', {
             targets: {
-              browsers: ['chrome > 55']
+              browsers: ['chrome > 65']
             },
             modules: false
           }]

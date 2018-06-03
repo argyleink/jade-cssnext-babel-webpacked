@@ -1,3 +1,2 @@
 import 'ragrid'
-import 'CSS/elements/body.css'
-import 'CSS/elements/header.css'
+import { body, header } from '~/css/elements'
