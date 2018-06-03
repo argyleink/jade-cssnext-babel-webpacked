@@ -21,10 +21,9 @@ const PAGES = require('glob')
 const DATA = require('quaff')('./app/data/')
 
 module.exports = {
-  entry: PAGES.reduce((entries, entry) => {
-    entries[entry] = path.resolve(__dirname, `${PATHS.views}${entry}.js`)
-    return entries
-  }, {}),
+  entry: PAGES.reduce((entries, entry) => Object.assign(entries, {
+    [entry]: path.resolve(__dirname, `${PATHS.views}${entry}.js`)
+  }), {}),
   output: {
     path:     PATHS.output,
     filename: '[name].js',
