@@ -13,7 +13,7 @@
   "author": "Adam Argyle",
   "license": "MIT",
   "dependencies": {
-    "blingblingjs": "^1.0.1",
+    "blingblingjs": "^2.0.0",
     "ragrid": "^1.0.5"
   },
   "devDependencies": {
